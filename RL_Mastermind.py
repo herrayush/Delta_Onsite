@@ -70,7 +70,7 @@ np.random.seed(123)
 env.seed(123)
 np.random.seed(123)
 env.seed(123)
-nb_actions = env.action_space.n
+nb_actions = env.action_space.n       
 
 model = Sequential()
 model.add(Flatten(input_shape=(1,) + env.observation_space.shape))
@@ -84,6 +84,6 @@ policy = EpsGreedyQPolicy()
 memory = SequentialMemory(limit=50000, window_length=1)
 dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, nb_steps_warmup=10,
 target_model_update=1e-2, policy=policy)
-dqn.compile(Adam(lr=1e-3), metrics=['mae'])
+dqn.compile(Adam(lr=1e-3), metrics=['mae'])      #There is an error here, which is not letting me to import this module both in Colab and local Jupyter
 
 dqn.fit(env, nb_steps=5000, visualize=True, verbose=2)
